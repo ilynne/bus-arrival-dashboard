@@ -1,47 +1,24 @@
-# Bus Arrival Dashboard
+# README
 
-Google, OneBusAway, and other apps offer real-time bus arrival information. The OneBusAway app even displays animation with bus locations.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Sometimes you need something much simpler. I live close to two bus stops and different buses that can get me to my destination (work) stop at each of them. A dashboard listing only the buses I am interested in at only the stops I am interested in would be a very good thing in the morning.
+Things you may want to cover:
 
-The Bus Arrival Dashboard should group the buses by stop and sort them by arrival time. Color coding the arrival times would help me decide which stop to walk toward.
+* Ruby version
 
-## Wireframes
+* System dependencies
 
-### Sign in
-![sign in](wireframes/images/images.001.png)
+* Configuration
 
-### Main page
-![main page](./wireframes/images/images.007.png)
+* Database creation
 
-### Admin
-![enter bus number](./wireframes/images/images.002.png)
+* Database initialization
 
-![select direction of travel](./wireframes/images/images.003.png)
+* How to run the test suite
 
-![select stop](./wireframes/images/images.004.png)
+* Services (job queues, cache servers, search engines, etc.)
 
-![add to group](./wireframes/images/images.005.png)
+* Deployment instructions
 
-![new route added](./wireframes/images/images.006.png)
-
-## Dependencies
-
-* node-sass
-* OneBusAway API
-* A back end to send requests to OneBusAway API (Rails API app)
-* A host
-* Firebase for authentication and user data
-
-## Tasks
-
-- [ ] Rails backend app
-  - Routes
-    - [ ] Fetch route info for bus
-    - [ ] Fetch arrival info for bus at stop
-- [ ] Find host for Rails app
-  - [ ] Deploy to host
-- [ ] Create React App
-  - [ ] Sign in
-  - [ ] Admin
-  - [ ] Main page
+* ...
