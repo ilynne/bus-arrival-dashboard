@@ -8,6 +8,20 @@ The Bus Arrival Dashboard should group the buses by stop and sort them by arriva
 
 ## Wireframes
 
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.001.png)
+
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.002.png)
+
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.003.png)
+
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.004.png)
+
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.005.png)
+
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.006.png)
+
+![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.007.png)
+
 ## Dependencies
 
 * node-sass
