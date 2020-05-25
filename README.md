@@ -8,19 +8,22 @@ The Bus Arrival Dashboard should group the buses by stop and sort them by arriva
 
 ## Wireframes
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.001.png)
+### Sign in
+![sign in](wireframes/images/images.001.png)
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.002.png)
+### Main page
+![main page](./wireframes/images/images.007.png)
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.003.png)
+### Admin
+![enter bus number](./wireframes/images/images.002.png)
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.004.png)
+![select direction of travel](./wireframes/images/images.003.png)
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.005.png)
+![select stop](./wireframes/images/images.004.png)
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.006.png)
+![add to group](./wireframes/images/images.005.png)
 
-![](wireframes/Bus Dashboard Wireframes/Bus Dashboard Wireframes.007.png)
+![new route added](./wireframes/images/images.006.png)
 
 ## Dependencies
 
@@ -32,9 +35,13 @@ The Bus Arrival Dashboard should group the buses by stop and sort them by arriva
 
 ## Tasks
 
- - [ ] Rails backend app
-   - Routes
-     - [ ] Fetch route info for bus
-     - [ ] Fetch arrival info for bus at stop
- - [ ] Find host for Rails app
- - [ ] Create React App
+- [ ] Rails backend app
+  - Routes
+    - [ ] Fetch route info for bus
+    - [ ] Fetch arrival info for bus at stop
+- [ ] Find host for Rails app
+  - [ ] Deploy to host
+- [ ] Create React App
+  - [ ] Sign in
+  - [ ] Admin
+  - [ ] Main page
