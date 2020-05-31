@@ -7,4 +7,8 @@ Rails.application.routes.draw do
       get '/stops/:id/arrivals', to: 'one_bus_away#arrivals'
     end
   end
+
+  get '*path', to: 'application#frontend_index_html', constraints: lambda { |request|
+      !request.xhr? && request.format.html?
+    }
 end
