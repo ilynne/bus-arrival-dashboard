@@ -1,0 +1,27 @@
+{
+  "name": "bus-arrival-dashboard",
+  "version": "1.0.0",
+  "description": "simple dashboard to view selected bus arrival times",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd client && yarn start",
+    "build": "cd client && yarn build",
+    "install": "cd client && yarn"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilynne/bus-arrival-dashboard.git"
+  },
+  "keywords": [],
+  "author": "Lynne Cooney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ilynne/bus-arrival-dashboard/issues"
+  },
+  "homepage": "https://github.com/ilynne/bus-arrival-dashboard#readme"
+}
