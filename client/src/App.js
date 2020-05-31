@@ -12,6 +12,7 @@ const fetchTestDatas = function () {
 function App() {
   return (
     <div className="App">
+      <h1>Bus arrival dashboard</h1>
       <button onClick={fetchTestDatas}>
         Fetch Test Datas
       </button>
