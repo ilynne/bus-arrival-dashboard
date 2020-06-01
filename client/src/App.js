@@ -1,21 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Home from './Home';
+import Dashboard from './Dashboard';
 
-const fetchTestDatas = function () {
-  fetch('/api/v1/routes')
-    .then(res => res.json())
-    .then((response) => { console.log("Test datas response", response); })
-    .catch((error) => { console.log("Error while fetching test datas", error); })
-}
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <h1>Bus arrival dashboard</h1>
-      <button onClick={fetchTestDatas}>
-        Fetch Test Datas
-      </button>
+      <Router>
+        <Route exact path="/" component={Home} />
+        <Route path="/dashboard" component={Dashboard} />
+      </Router>
     </div>
   );
 }
