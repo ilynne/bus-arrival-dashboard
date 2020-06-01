@@ -27,11 +27,14 @@ The Bus Arrival Dashboard should group the buses by stop and sort them by arriva
 
 ## Dependencies
 
-* node-sass
-* OneBusAway API
-* A back end to send requests to OneBusAway API (Rails API app)
-* A host
-* Firebase for authentication and user data
+- node-sass
+- OneBusAway API
+  - Requires a key
+- A host
+- Firebase for authentication and user data
+- Ruby 2.6.3 or greater
+- Rails 6.0
+
 
 ## Tasks
 
@@ -67,3 +70,17 @@ The Bus Arrival Dashboard should group the buses by stop and sort them by arriva
 - [ ] Add CSS styles
 - [ ] Add any additional tests
 - [ ] Deploy to host
+
+## Setting up this app
+
+### Local Development
+
+- Clone this repository.
+- Run `bundle install`
+- Generate new credentials for OneBusAway API key: https://edgeguides.rubyonrails.org/security.html#custom-credentials
+- To start the API and Web servers separately for development: `bundle exec foreman start -f Procfile.dev`
+
+## Deploying to a host
+
+- Host must support Ruby on Rails. Hosted on Heroku at https://intense-brushlands-86127.herokuapp.com/
+- `npm run build` to create an optimized production build of the React front end
