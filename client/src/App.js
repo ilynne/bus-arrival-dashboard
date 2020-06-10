@@ -1,10 +1,10 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Home from './Home';
-import Dashboard from './Dashboard';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Dashboard from './components/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 
-import './App.css';
+import './styles/App.css';
 
 function App() {
   return (
