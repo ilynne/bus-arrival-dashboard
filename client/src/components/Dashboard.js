@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import Navigation from './Navigation';
 
 export default class Dashboard extends React.Component {
   fetchTestDatas = function () {
@@ -11,14 +12,12 @@ export default class Dashboard extends React.Component {
 
   render() {
     console.log('hello', firebase.auth().currentUser, firebase.auth().currentUser.uid);
-    const { uid, displayName, email, photoURL } = firebase.auth().currentUser;
-    console.log(uid, displayName, email, photoURL)
+    const { uid } = firebase.auth().currentUser;
     return (
       <div>
         <button onClick={this.fetchTestDatas}>
           Fetch Test Datas
         </button>
-        <img alt="lynne photo" src={photoURL}></img>
       </div>
     )
   }
