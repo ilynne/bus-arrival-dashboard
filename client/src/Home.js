@@ -11,6 +11,7 @@ export default class Home extends React.Component {
     ],
     callbacks: {
         signInSuccessWithAuthResult: () => {
+          console.log(firebase.auth().currentUser);
           this.props.history.push('/dashboard');
         }
     }
