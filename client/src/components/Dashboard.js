@@ -11,12 +11,14 @@ export default class Dashboard extends React.Component {
 
   render() {
     console.log('hello', firebase.auth().currentUser, firebase.auth().currentUser.uid);
-    const { uid, displayName, email } = firebase.auth().currentUser;
+    const { uid, displayName, email, photoURL } = firebase.auth().currentUser;
+    console.log(uid, displayName, email, photoURL)
     return (
       <div>
         <button onClick={this.fetchTestDatas}>
           Fetch Test Datas
         </button>
+        <img alt="lynne photo" src={photoURL}></img>
       </div>
     )
   }
