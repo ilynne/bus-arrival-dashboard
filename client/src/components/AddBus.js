@@ -1,21 +1,61 @@
 import React from 'react';
 import firebase from 'firebase';
+import DirectionList from './DirectionList';
 
 export default class AddBus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      busNumber: ''
+      busNumber: '',
+      busRouteId: '',
+      routesForAgency: [],
+      stopGroupId: '',
+      stopGroupsByBusRouteId: {}
     }
-    this.handleBusNumberChange = this.handleBusNumberChange.bind(this)
-    this.fetchTestDatas = this.fetchTestDatas.bind(this)
+    this.handleBusNumberChange = this.handleBusNumberChange.bind(this);
+    this.fetchRoutesForAgency = this.fetchRoutesForAgency.bind(this);
+    this.fetchStopsForRoute = this.fetchStopsForRoute.bind(this);
+    // this.filterRoutesByShortName = this.filterRoutesByShortName.bind(this);
   }
 
-  fetchTestDatas = () => {
-    fetch('/api/v1/routes/1_102615/stops')
+  componentDidMount = () => {
+    this.fetchRoutesForAgency();
+  }
+
+  fetchRoutesForAgency = function () {
+    fetch('/api/v1/routes')
       .then(res => res.json())
-      .then((response) => { console.log("stops for route 1_102615", response); })
+      .then((response) => { this.setRoutesForAgency(response.data) })
       .catch((error) => { console.log("Error while fetching test datas", error); })
+  }
+
+  fetchStopsForRoute = () => {
+    console.log('fetch stops', this.state.busRouteId)
+    fetch(`/api/v1/routes/${this.state.busRouteId}/stops`)
+      .then(res => res.json())
+      .then((response) => { console.log(response);
+                            this.setStopGroupsByBusRouteId(response.data); })
+      .catch((error) => { console.log("Error while fetching test datas", error); })
+  }
+
+  setRoutesForAgency = (data) => {
+    const { list, references } = data;
+    console.log(list, references);
+    this.setState({
+      routesForAgency: list
+    });
+  }
+
+  setStopGroupsByBusRouteId = (data) => {
+    const { entry } = data;
+    const { stopGroupings } = entry;
+    const { busRouteId } = this.state
+    this.setState({
+      stopGroupsByBusRouteId: {
+        [busRouteId]: stopGroupings[0].stopGroups,
+        ...this.state.stopGroupsByBusRouteId
+      }
+    })
   }
 
   handleFormSubmit(e) {
@@ -23,13 +63,35 @@ export default class AddBus extends React.Component {
   }
 
   handleBusNumberChange(e) {
-    console.log(e.target.value)
-    this.fetchTestDatas();
+    console.log(this.state.busNumber)
+    this.setState({
+      busNumber: e.target.value
+    }, () => this.filterRoutesByShortName())
+  }
+
+  handleDirectionClick(index) {
+    console.log(index)
+  }
+
+  filterRoutesByShortName = () => {
+    const routeForBusNumber = this.state.routesForAgency.find(route => route.shortName == this.state.busNumber);
+    console.log(routeForBusNumber)
+    if (routeForBusNumber) {
+      this.setState({
+        busRouteId: routeForBusNumber.id
+      }, () => { this.fetchStopsForRoute() });
+    } else {
+      this.setState({
+        busRouteId: ""
+      })
+    }
   }
 
   render() {
     console.log('add bus', firebase.auth().currentUser, firebase.auth().currentUser.uid);
     const { uid } = firebase.auth().currentUser;
+    const { busRouteId, stopGroupsByBusRouteId } = this.state;
+    const stopGroups = stopGroupsByBusRouteId[busRouteId] || [];
     return (
       <form
         className={'add-bus-form'}
@@ -45,6 +107,15 @@ export default class AddBus extends React.Component {
             onChange={this.handleBusNumberChange}
           >
           </input>
+          { this.state.busRouteId }
+          { stopGroups
+            ? <DirectionList
+                stopGroups={stopGroups}
+                handleDirectionClick={this.handleDirectionClick}
+              >
+              </DirectionList>
+            : null
+          }
       </form>
     )
   }
