@@ -3,8 +3,6 @@ import React from 'react';
 function DirectionList(props) {
 
   const handleDirectionClick = (e) => {
-    console.log(e.target, e.target.dataset.id)
-    console.log('click')
     props.handleDirectionClick(e.target.dataset.id)
   }
 

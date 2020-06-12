@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import DirectionList from './DirectionList';
+import StopList from './StopList';
 
 export default class AddBus extends React.Component {
   constructor(props) {
@@ -10,11 +11,15 @@ export default class AddBus extends React.Component {
       busRouteId: '',
       routesForAgency: [],
       stopGroupId: '',
-      stopGroupsByBusRouteId: {}
+      stopsByBusRouteId: {},
+      directionIndex: -1,
+      selectedStops: [],
     }
     this.handleBusNumberChange = this.handleBusNumberChange.bind(this);
     this.fetchRoutesForAgency = this.fetchRoutesForAgency.bind(this);
     this.fetchStopsForRoute = this.fetchStopsForRoute.bind(this);
+    this.handleDirectionClick = this.handleDirectionClick.bind(this);
+    this.handleStopClick = this.handleStopClick.bind(this);
     // this.filterRoutesByShortName = this.filterRoutesByShortName.bind(this);
   }
 
@@ -34,7 +39,7 @@ export default class AddBus extends React.Component {
     fetch(`/api/v1/routes/${this.state.busRouteId}/stops`)
       .then(res => res.json())
       .then((response) => { console.log(response);
-                            this.setStopGroupsByBusRouteId(response.data); })
+                            this.setStopsByBusRouteId(response.data); })
       .catch((error) => { console.log("Error while fetching test datas", error); })
   }
 
@@ -46,14 +51,13 @@ export default class AddBus extends React.Component {
     });
   }
 
-  setStopGroupsByBusRouteId = (data) => {
-    const { entry } = data;
-    const { stopGroupings } = entry;
+  setStopsByBusRouteId = (data) => {
     const { busRouteId } = this.state
+    console.log(data)
     this.setState({
-      stopGroupsByBusRouteId: {
-        [busRouteId]: stopGroupings[0].stopGroups,
-        ...this.state.stopGroupsByBusRouteId
+      stopsByBusRouteId: {
+        [busRouteId]: data,
+        ...this.state.stopsByBusRouteId
       }
     })
   }
@@ -65,12 +69,37 @@ export default class AddBus extends React.Component {
   handleBusNumberChange(e) {
     console.log(this.state.busNumber)
     this.setState({
-      busNumber: e.target.value
+      directionIndex: -1,
+      busNumber: e.target.value,
+      selectedStops: [],
     }, () => this.filterRoutesByShortName())
   }
 
   handleDirectionClick(index) {
-    console.log(index)
+    console.log('direction', index)
+    this.setState({
+      directionIndex: index
+    })
+  }
+
+  handleStopClick(stopId) {
+    console.log('stop', stopId)
+    const { selectedStops } = this.state;
+    this.setState({
+      selectedStops: [stopId, ...selectedStops]
+    })
+  }
+
+  stopsForDirection() {
+    const stopGroups = this.stopGroups();
+    const { directionIndex } = this.state;
+    if (directionIndex >= 0) {
+      const stopIds = stopGroups[directionIndex].stopIds;
+      console.log(stopIds)
+      const { busRouteId, stopsByBusRouteId } = this.state;
+      const { references } = stopsByBusRouteId[busRouteId] || [];
+      return references.stops.filter(stop => stopIds.includes(stop.id));
+    }
   }
 
   filterRoutesByShortName = () => {
@@ -87,11 +116,22 @@ export default class AddBus extends React.Component {
     }
   }
 
+  stopGroups = () => {
+    const { busRouteId, stopsByBusRouteId } = this.state;
+    const { entry } = stopsByBusRouteId[busRouteId] || [];
+    if (entry) {
+      return entry.stopGroupings[0].stopGroups;
+    } else {
+      return [];
+    }
+  }
+
   render() {
     console.log('add bus', firebase.auth().currentUser, firebase.auth().currentUser.uid);
     const { uid } = firebase.auth().currentUser;
-    const { busRouteId, stopGroupsByBusRouteId } = this.state;
-    const stopGroups = stopGroupsByBusRouteId[busRouteId] || [];
+    const stopGroups = this.stopGroups();
+    const stopsForDirection = this.stopsForDirection();
+
     return (
       <form
         className={'add-bus-form'}
@@ -114,6 +154,14 @@ export default class AddBus extends React.Component {
                 handleDirectionClick={this.handleDirectionClick}
               >
               </DirectionList>
+            : null
+          }
+          { stopsForDirection
+            ? <StopList
+                stopsForDirection={stopsForDirection}
+                handleStopClick={this.handleStopClick}
+              >
+              </StopList>
             : null
           }
       </form>
