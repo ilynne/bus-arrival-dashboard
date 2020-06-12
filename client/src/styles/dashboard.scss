@@ -1,0 +1,33 @@
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "title display-user"
+    "tabs tabs";
+  >div {
+    display: inline;
+  }
+  >img {
+    max-width: 32px;
+  }
+}
+
+.title {
+  grid-area: title;
+}
+
+.tabs {
+  grid-area: tabs;
+}
+
+.display-user {
+  grid-area: display-user;
+  text-align: right;
+  >img {
+    max-width: 32px;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

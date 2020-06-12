@@ -41,7 +41,6 @@ export default class Home extends React.Component {
           isSignedIn={this.state.isSignedIn}
           signOut={this.signOut}>
         </Navigation>
-        <h1>Bus Arrival Dashboard</h1>
         { this.state.isSignedIn
           ? <Dashboard></Dashboard>
           : <StyledFirebaseAuth
