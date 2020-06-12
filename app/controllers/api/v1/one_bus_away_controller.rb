@@ -1,6 +1,5 @@
 class Api::V1::OneBusAwayController < ApplicationController
   def routes
-    # this should be cached
     routes = Rails.cache.fetch("routes", expires_in: 300.seconds) do
       OneBusAway.routes_for_agency
     end
@@ -8,7 +7,9 @@ class Api::V1::OneBusAwayController < ApplicationController
   end
 
   def stops
-    stops = OneBusAway.stops_for_route(params[:id])
+    stops = Rails.cache.fetch("stops_#{params[:id]}", expires_in: 300.seconds) do
+      OneBusAway.stops_for_route(params[:id])
+    end
     render json: stops
   end
 
