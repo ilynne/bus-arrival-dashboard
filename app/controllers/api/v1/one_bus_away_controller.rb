@@ -1,7 +1,9 @@
 class Api::V1::OneBusAwayController < ApplicationController
   def routes
     # this should be cached
-    routes = OneBusAway.routes_for_agency
+    routes = Rails.cache.fetch("routes", expires_in: 300.seconds) do
+      OneBusAway.routes_for_agency
+    end
     render json: routes
   end
 
