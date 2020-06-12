@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase';
 import Navigation from './Navigation';
+import AddBus from './AddBus';
 
 export default class Dashboard extends React.Component {
   fetchTestDatas = function () {
@@ -11,10 +12,11 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
-    console.log('hello', firebase.auth().currentUser, firebase.auth().currentUser.uid);
+    console.log('dashboard', firebase.auth().currentUser, firebase.auth().currentUser.uid);
     const { uid } = firebase.auth().currentUser;
     return (
       <div>
+        <AddBus></AddBus>
         <button onClick={this.fetchTestDatas}>
           Fetch Test Datas
         </button>

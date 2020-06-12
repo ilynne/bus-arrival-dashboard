@@ -10,10 +10,10 @@ export default class DisplayUser extends React.Component {
   render() {
     const { displayName, photoURL } = firebase.auth().currentUser;
     return (
-      <div class='display-user'>
+      <div className='display-user'>
         <img alt="gravatar" src={photoURL}></img>
         <span>{displayName}</span>
-        <span class="clickable" onClick={this.signOut}>
+        <span className="clickable" onClick={this.signOut}>
           Sign Out
         </span>
       </div>
