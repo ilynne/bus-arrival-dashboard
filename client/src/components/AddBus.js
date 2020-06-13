@@ -15,14 +15,13 @@ export default class AddBus extends React.Component {
       stopsByBusRouteId: {},
       directionIndex: -1,
       selectedStops: [],
-      groups: [],
+      selectedGroupId: ''
     }
     this.handleBusNumberChange = this.handleBusNumberChange.bind(this);
     this.fetchRoutesForAgency = this.fetchRoutesForAgency.bind(this);
     this.fetchStopsForRoute = this.fetchStopsForRoute.bind(this);
     this.handleDirectionClick = this.handleDirectionClick.bind(this);
     this.handleStopClick = this.handleStopClick.bind(this);
-    this.handleGroupBlur = this.handleGroupBlur.bind(this);
     this.handleGroupClick = this.handleGroupClick.bind(this);
   }
 
@@ -78,25 +77,10 @@ export default class AddBus extends React.Component {
     }, () => this.filterRoutesByShortName())
   }
 
-  handleGroupBlur(groupName) {
-    console.log(groupName)
-    const existingGroup = this.state.groups.filter(group => group.name === groupName)
-    console.log(existingGroup)
-    // just send these to firebase on blur
-    if (existingGroup.length < 1) {
-      this.setState({
-        groups: [
-          ...this.state.groups,
-          {
-          id: null,
-          name: groupName
-        }]
-      })
-    }
-  }
-
-  handleGroupClick(id) {
-    console.log(id)
+  handleGroupClick(groupId) {
+    this.setState({
+      selectedGroupId: groupId
+    })
   }
 
   handleDirectionClick(index) {
@@ -168,8 +152,8 @@ export default class AddBus extends React.Component {
         method={'post'}>
           <GroupList
             groupList={this.state.groups}
-            handleGroupBlur={this.handleGroupBlur}
             handleGroupClick={this.handleGroupClick}
+            selectedGroupId={this.state.selectedGroupId}
           >
           </GroupList>
 

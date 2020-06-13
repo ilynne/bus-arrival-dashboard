@@ -1,37 +1,85 @@
 import React from 'react';
+import db from '../db';
+import firebase from 'firebase';
 
-function GroupList(props) {
-
-  const handleGroupClick = (e) => {
-    props.handleGroupClick(e.target.dataset.id);
+export default class GroupList extends React.Component {
+  state = {
+    newGroupName: '',
+    groups: []
   }
 
-  const handleGroupBlur = (e) => {
-    props.handleGroupBlur(e.target.value);
-    e.target.value = '';
+  handleGroupChange = (e) => {
+    this.setState({
+      newGroupName: e.target.value
+    })
   }
 
-  return (
-    <div>
-      <p>Group</p>
-      <ul>
-        { props.groupList.map((group, i) => (
-          <li
-            onClick={handleGroupClick}
-            key={`group-${i}`}
-            data-id={group.id}>{group.name}</li>
-          ))
-        }
-      </ul>
-      <input
-        type={'text'}
-        id={'group-name'}
-        name={'group-name'}
-        onBlur={handleGroupBlur}
-      >
-      </input>
-    </div>
-  );
+  handleGroupClick = (e) => {
+    this.props.handleGroupClick(e.target.dataset.id);
+  }
+
+  handleGroupBlur = (e) => {
+    if (this.state.newGroupName === '') {
+      return
+    } else {
+      this.addGroup();
+    }
+  }
+
+  addGroup = (groupName) => {
+    const uid = firebase.auth().currentUser.uid;
+    db
+      .collection('users')
+      .doc(uid)
+      .collection('groups')
+      .add({
+        name: this.state.newGroupName
+      }).then(() => {
+        this.setState({ newGroupName: '' })
+      })
+  }
+
+  componentDidMount() {
+    const uid = firebase.auth().currentUser.uid;
+
+    this.unsubscribe = db
+      .collection('users')
+      .doc(uid)
+      .collection('groups')
+      .onSnapshot(snapshot => {
+        this.setState({ groups: snapshot.docs });
+      });
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Group</p>
+        <ul>
+          { this.state.groups.map((group) => (
+            <li
+              className={this.props.selectedGroupId === group.id ? 'selected' : null}
+              onClick={this.handleGroupClick}
+              key={group.id}
+              data-id={group.id}>{group.data().name}</li>
+            ))
+          }
+        </ul>
+        <input
+          type={'text'}
+          id={'group-name'}
+          name={'group-name'}
+          onChange={this.handleGroupChange}
+          onBlur={this.handleGroupBlur}
+        >
+        </input>
+      </div>
+    );
+  }
 }
-
-export default GroupList;
