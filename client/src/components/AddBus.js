@@ -1,21 +1,23 @@
 import React from 'react';
 import firebase from 'firebase';
+import db from '../db';
 import DirectionList from './DirectionList';
 import StopList from './StopList';
 import GroupList from './GroupList';
+import BusList from './BusList';
 
 export default class AddBus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      busNumber: '',
-      busRouteId: '',
+      busNumber: '40',
+      busRouteId: '1_102574',
       routesForAgency: [],
       stopGroupId: '',
       stopsByBusRouteId: {},
       directionIndex: -1,
       selectedStops: [],
-      selectedGroupId: ''
+      selectedGroupId: 'flxsiBckgnPPBqYm2teq'
     }
     this.handleBusNumberChange = this.handleBusNumberChange.bind(this);
     this.fetchRoutesForAgency = this.fetchRoutesForAgency.bind(this);
@@ -68,11 +70,11 @@ export default class AddBus extends React.Component {
     e.preventDefault();
   }
 
-  handleBusNumberChange(e) {
-    console.log(this.state.busNumber)
+  handleBusNumberChange(busNumber) {
+    // console.log(this.state.busNumber)
     this.setState({
       directionIndex: -1,
-      busNumber: e.target.value,
+      busNumber: busNumber,
       selectedStops: [],
     }, () => this.filterRoutesByShortName())
   }
@@ -105,12 +107,29 @@ export default class AddBus extends React.Component {
     }
   }
 
+  // doCrud(stopId) {
+  //   console.log('crud')
+  //   const uid = firebase.auth().currentUser.uid;
+  //   const { selectedGroupId } = this.state;
+  //   db
+  //     .collection('users')
+  //     .doc(uid)
+  //     .collection('groups')
+  //     .doc(selectedGroupId)
+  //     .collection('stops')
+  //     .add({
+  //       id: stopId
+  //     }).then(() => {
+  //       console.log('stop added')
+  //     })
+  // }
+
   stopsForDirection() {
     const stopGroups = this.stopGroups();
     const { directionIndex } = this.state;
     if (directionIndex >= 0) {
       const stopIds = stopGroups[directionIndex].stopIds;
-      console.log(stopIds)
+      // console.log(stopIds)
       const { busRouteId, stopsByBusRouteId } = this.state;
       const { references } = stopsByBusRouteId[busRouteId] || [];
       return references.stops.filter(stop => stopIds.includes(stop.id));
@@ -130,6 +149,23 @@ export default class AddBus extends React.Component {
       })
     }
   }
+
+  // addBus = (stopId) => {
+  //   console.log('addBus')
+  //   const uid = firebase.auth().currentUser.uid;
+  //   const { selectedGroupId } = this.state;
+  //   db
+  //     .collection('users')
+  //     .doc(uid)
+  //     .collection('groups')
+  //     .doc(selectedGroupId)
+  //     .collection('stops')
+  //     .add({
+  //       id: stopId,
+  //     }).then(() => {
+  //       console.log('stop added')
+  //     })
+  // }
 
   stopGroups = () => {
     const { busRouteId, stopsByBusRouteId } = this.state;
@@ -157,18 +193,12 @@ export default class AddBus extends React.Component {
           >
           </GroupList>
 
-          <p>Bus Number:</p>
-          <input
-            type={'text'}
-            id={'bus-number'}
-            name={'bus-number'}
-            value={this.state.busNumber}
-            required={true}
-            onChange={this.handleBusNumberChange}
-          >
-          </input>
-
-          { this.state.busRouteId }
+          { this.state.selectedGroupId !== ''
+            ? <BusList
+                handleBusNumberChange={this.handleBusNumberChange}>
+              </BusList>
+            : this.state.selectedGroupId
+          }
 
           { stopGroups
             ? <DirectionList
@@ -182,6 +212,8 @@ export default class AddBus extends React.Component {
 
           { stopsForDirection
             ? <StopList
+                busRouteId={this.state.busRouteId}
+                selectedGroupId={this.state.selectedGroupId}
                 stopsForDirection={stopsForDirection}
                 handleStopClick={this.handleStopClick}
                 selectedStops={this.state.selectedStops}
