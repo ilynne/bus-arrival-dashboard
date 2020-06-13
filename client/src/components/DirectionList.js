@@ -10,6 +10,7 @@ function DirectionList(props) {
     <ul>
       { props.stopGroups.map((stopGroup, i) => (
         <li
+          className={Number(props.directionIndex) === i ? 'selected' : null}
           onClick={handleDirectionClick}
           key={`direction-${i}`}
           data-id={i}>{stopGroup.name.name}</li>

@@ -78,16 +78,23 @@ export default class AddBus extends React.Component {
   handleDirectionClick(index) {
     console.log('direction', index)
     this.setState({
+      selectedStops: [],
       directionIndex: index
     })
   }
 
   handleStopClick(stopId) {
     console.log('stop', stopId)
-    const { selectedStops } = this.state;
-    this.setState({
-      selectedStops: [stopId, ...selectedStops]
-    })
+    const { selectedStops } = this.state
+    if (selectedStops.includes(stopId)) {
+      this.setState({
+        selectedStops: selectedStops.filter(stop => stop !== stopId)
+      })
+    } else {
+      this.setState({
+        selectedStops: [stopId, ...selectedStops]
+      })
+    }
   }
 
   stopsForDirection() {
@@ -152,6 +159,7 @@ export default class AddBus extends React.Component {
             ? <DirectionList
                 stopGroups={stopGroups}
                 handleDirectionClick={this.handleDirectionClick}
+                directionIndex={this.state.directionIndex}
               >
               </DirectionList>
             : null
@@ -160,6 +168,7 @@ export default class AddBus extends React.Component {
             ? <StopList
                 stopsForDirection={stopsForDirection}
                 handleStopClick={this.handleStopClick}
+                selectedStops={this.state.selectedStops}
               >
               </StopList>
             : null

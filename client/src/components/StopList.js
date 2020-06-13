@@ -10,6 +10,7 @@ function StopList(props) {
     <ul>
       { props.stopsForDirection.map((stop, i) => (
         <li
+          className={props.selectedStops.includes(stop.id) && 'selected'}
           onClick={handleStopClick}
           key={`direction-${i}`}
           data-id={stop.id}>{stop.name}</li>
