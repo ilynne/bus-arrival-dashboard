@@ -14,7 +14,7 @@ function StopList(props) {
           <li
             className={props.selectedStops.includes(stop.id) && 'selected'}
             onClick={handleStopClick}
-            key={`direction-${i}`}
+            key={`stop-${i}`}
             data-id={stop.id}>{stop.name}</li>
           ))
         }
