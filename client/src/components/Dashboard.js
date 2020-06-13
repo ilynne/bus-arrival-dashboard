@@ -9,7 +9,10 @@ export default class Dashboard extends React.Component {
     const { uid } = firebase.auth().currentUser;
     return (
       <div>
-        <AddBus></AddBus>
+        { this.props.selectedTab === 'admin'
+          ? <AddBus></AddBus>
+          : null
+        }
       </div>
     )
   }

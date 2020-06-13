@@ -10,12 +10,12 @@ export default class AddBus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      busNumber: '40',
-      busRouteId: '1_102574',
+      busNumber: '',
+      busRouteId: '',
       routesForAgency: [],
       stopsByBusRouteId: {},
       directionIndex: -1,
-      selectedGroupId: 'flxsiBckgnPPBqYm2teq'
+      selectedGroupId: ''
     }
     this.handleBusNumberChange = this.handleBusNumberChange.bind(this);
     this.fetchRoutesForAgency = this.fetchRoutesForAgency.bind(this);
@@ -76,7 +76,10 @@ export default class AddBus extends React.Component {
 
   handleGroupClick(groupId) {
     this.setState({
-      selectedGroupId: groupId
+      selectedGroupId: groupId,
+      busNumber: '',
+      busRouteId: '',
+      directionIndex: -1
     })
   }
 
@@ -139,6 +142,7 @@ export default class AddBus extends React.Component {
 
           { this.state.selectedGroupId !== ''
             ? <BusList
+                busNumber={this.state.busNumber}
                 handleBusNumberChange={this.handleBusNumberChange}>
               </BusList>
             : this.state.selectedGroupId

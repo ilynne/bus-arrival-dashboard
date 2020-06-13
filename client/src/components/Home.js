@@ -6,7 +6,8 @@ import Dashboard from './Dashboard';
 
 export default class Home extends React.Component {
   state = {
-    isSignedIn: false
+    isSignedIn: false,
+    selectedTab: ''
   }
 
   uiConfig = {
@@ -34,15 +35,26 @@ export default class Home extends React.Component {
     firebase.auth().signOut();
   }
 
+  handleGroupClick = (tabId) => {
+    console.log(tabId)
+    this.setState({
+      selectedTab: tabId
+    })
+  }
+
   render() {
     return (
       <div>
         <Navigation
           isSignedIn={this.state.isSignedIn}
-          signOut={this.signOut}>
+          signOut={this.signOut}
+          handleGroupClick={this.handleGroupClick}>
         </Navigation>
         { this.state.isSignedIn
-          ? <Dashboard></Dashboard>
+          ? <Dashboard
+              selectedTab={this.state.selectedTab}
+            >
+            </Dashboard>
           : <StyledFirebaseAuth
               uiConfig={this.uiConfig}
               firebaseAuth={firebase.auth()}

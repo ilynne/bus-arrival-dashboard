@@ -1,10 +1,14 @@
 import React from 'react';
 import firebase from 'firebase';
 import DisplayUser from './DisplayUser';
+import TabList from './TabList';
 
 export default class Navigation extends React.Component {
-    render() {
+  state = {
+    groups: []
+  }
 
+  render() {
     return (
       <div className="navigation">
         <div className="title">Bus Arrivals</div>
@@ -14,9 +18,13 @@ export default class Navigation extends React.Component {
               signOut={this.props.signOut} />
           : null
         }
-        <div className="tabs">
-          <span>tab here</span>
-        </div>
+        { this.props.isSignedIn
+          ? <TabList
+              handleGroupClick={this.props.handleGroupClick}
+            >
+            </TabList>
+          : null
+        }
       </div>
     )
   }
