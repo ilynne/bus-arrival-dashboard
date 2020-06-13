@@ -7,16 +7,19 @@ function DirectionList(props) {
   }
 
   return (
-    <ul>
-      { props.stopGroups.map((stopGroup, i) => (
-        <li
-          className={Number(props.directionIndex) === i ? 'selected' : null}
-          onClick={handleDirectionClick}
-          key={`direction-${i}`}
-          data-id={i}>{stopGroup.name.name}</li>
-        ))
-      }
-    </ul>
+    <div>
+      <p>Direction</p>
+      <ul>
+        { props.stopGroups.map((stopGroup, i) => (
+          <li
+            className={Number(props.directionIndex) === i ? 'selected' : null}
+            onClick={handleDirectionClick}
+            key={`direction-${i}`}
+            data-id={i}>{stopGroup.name.name}</li>
+          ))
+        }
+      </ul>
+    </div>
   );
 }
 

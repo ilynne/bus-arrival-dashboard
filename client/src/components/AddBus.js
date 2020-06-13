@@ -128,8 +128,6 @@ export default class AddBus extends React.Component {
     const { entry } = stopsByBusRouteId[busRouteId] || [];
     if (entry) {
       return entry.stopGroupings[0].stopGroups;
-    } else {
-      return [];
     }
   }
 
