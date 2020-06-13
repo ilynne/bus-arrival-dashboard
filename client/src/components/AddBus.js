@@ -13,17 +13,14 @@ export default class AddBus extends React.Component {
       busNumber: '40',
       busRouteId: '1_102574',
       routesForAgency: [],
-      stopGroupId: '',
       stopsByBusRouteId: {},
       directionIndex: -1,
-      selectedStops: [],
       selectedGroupId: 'flxsiBckgnPPBqYm2teq'
     }
     this.handleBusNumberChange = this.handleBusNumberChange.bind(this);
     this.fetchRoutesForAgency = this.fetchRoutesForAgency.bind(this);
     this.fetchStopsForRoute = this.fetchStopsForRoute.bind(this);
     this.handleDirectionClick = this.handleDirectionClick.bind(this);
-    this.handleStopClick = this.handleStopClick.bind(this);
     this.handleGroupClick = this.handleGroupClick.bind(this);
   }
 
@@ -71,11 +68,9 @@ export default class AddBus extends React.Component {
   }
 
   handleBusNumberChange(busNumber) {
-    // console.log(this.state.busNumber)
     this.setState({
       directionIndex: -1,
-      busNumber: busNumber,
-      selectedStops: [],
+      busNumber: busNumber
     }, () => this.filterRoutesByShortName())
   }
 
@@ -88,41 +83,9 @@ export default class AddBus extends React.Component {
   handleDirectionClick(index) {
     console.log('direction', index)
     this.setState({
-      selectedStops: [],
       directionIndex: index
     })
   }
-
-  handleStopClick(stopId) {
-    console.log('stop', stopId)
-    const { selectedStops } = this.state
-    if (selectedStops.includes(stopId)) {
-      this.setState({
-        selectedStops: selectedStops.filter(stop => stop !== stopId)
-      })
-    } else {
-      this.setState({
-        selectedStops: [stopId, ...selectedStops]
-      })
-    }
-  }
-
-  // doCrud(stopId) {
-  //   console.log('crud')
-  //   const uid = firebase.auth().currentUser.uid;
-  //   const { selectedGroupId } = this.state;
-  //   db
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('groups')
-  //     .doc(selectedGroupId)
-  //     .collection('stops')
-  //     .add({
-  //       id: stopId
-  //     }).then(() => {
-  //       console.log('stop added')
-  //     })
-  // }
 
   stopsForDirection() {
     const stopGroups = this.stopGroups();
@@ -150,23 +113,6 @@ export default class AddBus extends React.Component {
     }
   }
 
-  // addBus = (stopId) => {
-  //   console.log('addBus')
-  //   const uid = firebase.auth().currentUser.uid;
-  //   const { selectedGroupId } = this.state;
-  //   db
-  //     .collection('users')
-  //     .doc(uid)
-  //     .collection('groups')
-  //     .doc(selectedGroupId)
-  //     .collection('stops')
-  //     .add({
-  //       id: stopId,
-  //     }).then(() => {
-  //       console.log('stop added')
-  //     })
-  // }
-
   stopGroups = () => {
     const { busRouteId, stopsByBusRouteId } = this.state;
     const { entry } = stopsByBusRouteId[busRouteId] || [];
@@ -176,8 +122,6 @@ export default class AddBus extends React.Component {
   }
 
   render() {
-    console.log('add bus', firebase.auth().currentUser, firebase.auth().currentUser.uid);
-    const { uid } = firebase.auth().currentUser;
     const stopGroups = this.stopGroups();
     const stopsForDirection = this.stopsForDirection();
 
@@ -215,8 +159,6 @@ export default class AddBus extends React.Component {
                 busRouteId={this.state.busRouteId}
                 selectedGroupId={this.state.selectedGroupId}
                 stopsForDirection={stopsForDirection}
-                handleStopClick={this.handleStopClick}
-                selectedStops={this.state.selectedStops}
               >
               </StopList>
             : null
