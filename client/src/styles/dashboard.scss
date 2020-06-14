@@ -114,7 +114,7 @@ tr.warning {
 }
 
 tr.soon {
-  color: green;
+  color: darkgreen;
   font-size: x-large;
   font-weight: bold;
 }
@@ -124,7 +124,8 @@ tr.scheduled {
 }
 
 tr.past {
-  color: darkgray;
+  color: dimgray;
+  font-size: smaller
 }
 
 td.time-column {

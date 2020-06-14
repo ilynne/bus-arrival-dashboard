@@ -8,17 +8,19 @@ export default class ArrivalCard extends React.Component {
 
   componentDidMount = () => {
     this.fetchArrivalsForStop();
+    setInterval(this.fetchArrivalsForStop.bind(this), 60000);
   }
 
   fetchArrivalsForStop = function () {
-    fetch(`/api/v1/stops/${this.props.stopId}/arrivals`)
+    const { stopId } = this.props;
+
+    fetch(`/api/v1/stops/${stopId}/arrivals`)
       .then(res => res.json())
       .then((response) => { this.setArrivalsForStop(response.data) })
       .catch((error) => { console.log("Error while fetching test datas", error); })
   }
 
   setArrivalsForStop = (data) => {
-    console.log(data)
     this.setState({
       arrivalsForStop: data
     });
