@@ -130,3 +130,28 @@ tr.past {
 td.time-column {
   text-align: right;;
 }
+
+@media screen and (max-width: 767px) {
+  .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "title display-user"
+      "banner banner";
+  }
+
+  .banner {
+    border-top: 1px solid darkgray;
+    padding-bottom: 6px;
+  }
+
+  div.arrivals {
+    display: block;
+  }
+
+  .arrival-card {
+    border-left: none;
+    border-right: none;
+    margin: 6px 0 0 0;
+  }
+}
