@@ -109,6 +109,28 @@ table.arrivals {
   }
 }
 
+.admin {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "form group-preview";
+}
+
+.add-bus-form {
+  grid-area: form;
+  margin: 6px 3px 0 3px;
+  >div ul {
+    margin: 0;
+  }
+  >div p {
+    margin-bottom: 0;
+  }
+}
+
+.group-preview {
+  grid-area: group-preview;
+}
+
 tr.warning {
   color: red;
 }

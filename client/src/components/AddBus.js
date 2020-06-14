@@ -1,10 +1,9 @@
 import React from 'react';
-import firebase from 'firebase';
-import db from '../db';
 import DirectionList from './DirectionList';
 import StopList from './StopList';
 import GroupList from './GroupList';
 import BusList from './BusList';
+import GroupPreviewList from './GroupPreviewList';
 
 export default class AddBus extends React.Component {
   constructor(props) {
@@ -129,45 +128,55 @@ export default class AddBus extends React.Component {
     const stopsForDirection = this.stopsForDirection();
 
     return (
-      <form
-        className={'add-bus-form'}
-        onSubmit={this.handleFormSubmit}
-        method={'post'}>
-          <GroupList
-            groupList={this.state.groups}
-            handleGroupClick={this.handleGroupClick}
-            selectedGroupId={this.state.selectedGroupId}
-          >
-          </GroupList>
+      <div className={'admin'}>
+        <form
+          className={'add-bus-form'}
+          onSubmit={this.handleFormSubmit}
+          method={'post'}>
+            <GroupList
+              groupList={this.state.groups}
+              handleGroupClick={this.handleGroupClick}
+              selectedGroupId={this.state.selectedGroupId}
+            >
+            </GroupList>
 
-          { this.state.selectedGroupId !== ''
-            ? <BusList
-                busNumber={this.state.busNumber}
-                handleBusNumberChange={this.handleBusNumberChange}>
-              </BusList>
-            : this.state.selectedGroupId
-          }
+            { this.state.selectedGroupId !== ''
+              ? <BusList
+                  busNumber={this.state.busNumber}
+                  handleBusNumberChange={this.handleBusNumberChange}>
+                </BusList>
+              : this.state.selectedGroupId
+            }
 
-          { stopGroups
-            ? <DirectionList
-                stopGroups={stopGroups}
-                handleDirectionClick={this.handleDirectionClick}
-                directionIndex={this.state.directionIndex}
-              >
-              </DirectionList>
-            : null
-          }
+            { stopGroups
+              ? <DirectionList
+                  stopGroups={stopGroups}
+                  handleDirectionClick={this.handleDirectionClick}
+                  directionIndex={this.state.directionIndex}
+                >
+                </DirectionList>
+              : null
+            }
 
-          { stopsForDirection
-            ? <StopList
-                busRouteId={this.state.busRouteId}
-                selectedGroupId={this.state.selectedGroupId}
-                stopsForDirection={stopsForDirection}
-              >
-              </StopList>
-            : null
-          }
-      </form>
+            { stopsForDirection
+              ? <StopList
+                  busRouteId={this.state.busRouteId}
+                  selectedGroupId={this.state.selectedGroupId}
+                  stopsForDirection={stopsForDirection}
+                >
+                </StopList>
+              : null
+            }
+        </form>
+        { this.state.selectedGroupId !== ''
+          ? <GroupPreviewList
+              selectedGroupId={this.state.selectedGroupId}
+              routesForAgency={this.state.routesForAgency}
+              selectedGroupId={this.state.selectedGroupId}>
+            </GroupPreviewList>
+          : null
+        }
+      </div>
     )
   }
 }
