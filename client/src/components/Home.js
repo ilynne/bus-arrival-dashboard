@@ -57,7 +57,9 @@ export default class Home extends React.Component {
         <Navigation
           isSignedIn={this.state.isSignedIn}
           signOut={this.signOut}
-          handleGroupClick={this.handleGroupClick}>
+          handleGroupClick={this.handleGroupClick}
+          admin={this.state.admin}
+          selectedGroupId={this.state.selectedGroupId}>
         </Navigation>
         { this.state.isSignedIn
           ? <Dashboard

@@ -18,6 +18,11 @@
 
 .tabs {
   grid-area: tabs;
+  >span {
+    cursor: pointer;
+    padding: 0.25em;
+    text-transform: uppercase;
+  }
 }
 
 .display-user {

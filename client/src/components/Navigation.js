@@ -20,6 +20,8 @@ export default class Navigation extends React.Component {
         }
         { this.props.isSignedIn
           ? <TabList
+              admin={this.props.admin}
+              selectedGroupId={this.props.selectedGroupId}
               handleGroupClick={this.props.handleGroupClick}
             >
             </TabList>
