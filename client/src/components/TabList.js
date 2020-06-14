@@ -26,6 +26,7 @@ export default class TabList extends React.Component {
   }
 
   handleGroupClick = (e) => {
+    console.log('group clicked')
     this.props.handleGroupClick(e.target.dataset.id)
   }
 

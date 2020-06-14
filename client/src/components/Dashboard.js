@@ -1,16 +1,20 @@
 import React from 'react';
-import firebase from 'firebase';
-import Navigation from './Navigation';
 import AddBus from './AddBus';
+import Arrivals from './Arrivals';
 
 export default class Dashboard extends React.Component {
   render() {
-    console.log('dashboard', firebase.auth().currentUser, firebase.auth().currentUser.uid);
-    const { uid } = firebase.auth().currentUser;
     return (
       <div>
-        { this.props.selectedTab === 'admin'
+        { this.props.admin
           ? <AddBus></AddBus>
+          : null
+        }
+        { this.props.selectedGroupId !== ''
+          ? <Arrivals
+              selectedGroupId={this.props.selectedGroupId}
+            >
+            </Arrivals>
           : null
         }
       </div>

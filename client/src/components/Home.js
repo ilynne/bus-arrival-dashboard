@@ -7,7 +7,8 @@ import Dashboard from './Dashboard';
 export default class Home extends React.Component {
   state = {
     isSignedIn: false,
-    selectedTab: ''
+    selectedGroupId: '',
+    admin: false
   }
 
   uiConfig = {
@@ -37,9 +38,17 @@ export default class Home extends React.Component {
 
   handleGroupClick = (tabId) => {
     console.log(tabId)
-    this.setState({
-      selectedTab: tabId
-    })
+    if (tabId === 'admin') {
+      this.setState({
+        admin: true,
+        selectedGroupId: ''
+      })
+    } else {
+      this.setState({
+        admin: false,
+        selectedGroupId: tabId
+      })
+    }
   }
 
   render() {
@@ -52,7 +61,8 @@ export default class Home extends React.Component {
         </Navigation>
         { this.state.isSignedIn
           ? <Dashboard
-              selectedTab={this.state.selectedTab}
+              admin={this.state.admin}
+              selectedGroupId={this.state.selectedGroupId}
             >
             </Dashboard>
           : <StyledFirebaseAuth

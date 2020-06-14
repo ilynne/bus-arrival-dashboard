@@ -68,6 +68,7 @@ export default class StopList extends React.Component {
       .delete();
   }
 
+  // TODO: delete
   setGroupStops = () => {
     console.log('setGroupStops')
   }
