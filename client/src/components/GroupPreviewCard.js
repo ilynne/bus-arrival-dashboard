@@ -65,6 +65,7 @@ export default class GroupPreviewCard extends React.Component {
         { this.props.busRouteIds.map(busRouteId => (
           <p key={busRouteId.id}>
             {this.busRouteShortName(busRouteId.data().busRouteId)}
+            &nbsp;
             <span
               className={'clickable'}
               data-id={busRouteId.id}

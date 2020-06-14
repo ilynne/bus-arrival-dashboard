@@ -131,6 +131,23 @@ table.arrivals {
   grid-area: group-preview;
 }
 
+.group-preview-card {
+  width: 300px;
+  border: solid 1px lightgray;
+  margin: 6px 3px 0 3px;
+  >h2, p {
+    margin: 0;
+    font-size: 1em;
+    padding: 6px;
+  }
+  >p {
+    padding-top: 0;
+    >span.clickable {
+      font-size: smaller
+    }
+  }
+}
+
 tr.warning {
   color: red;
 }
@@ -176,5 +193,20 @@ td.time-column {
     border-left: none;
     border-right: none;
     margin: 6px 0 0 0;
+  }
+
+  .admin {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "form"
+      "group-preview";
+  }
+
+  .group-preview-card {
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    margin: 6px 0;
   }
 }
