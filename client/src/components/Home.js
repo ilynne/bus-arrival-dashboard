@@ -3,6 +3,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import Navigation from './Navigation';
 import Dashboard from './Dashboard';
+import Header from './Header';
 
 export default class Home extends React.Component {
   state = {
@@ -54,6 +55,11 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
+        <Header
+          isSignedIn={this.state.isSignedIn}
+          signOut={this.signOut}
+        >
+        </Header>
         <Navigation
           isSignedIn={this.state.isSignedIn}
           signOut={this.signOut}

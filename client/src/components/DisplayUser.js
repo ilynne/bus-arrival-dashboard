@@ -12,7 +12,7 @@ export default class DisplayUser extends React.Component {
     return (
       <div className='display-user'>
         <img alt="gravatar" src={photoURL}></img>
-        <span>{displayName}</span>
+        <span className={'user-name'}>{displayName}</span>
         <span className="clickable" onClick={this.signOut}>
           Sign Out
         </span>

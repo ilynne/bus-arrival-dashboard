@@ -1,35 +1,68 @@
-.navigation {
+.header {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
-    "title display-user"
-    "tabs tabs";
+    "title banner display-user";
+  background-color: black;
+  color: white;
+  font-size: 1.1em;
   >div {
     display: inline;
   }
-  >img {
-    max-width: 32px;
-  }
+}
+
+.title, .banner {
+  padding: 0.25em;
+  font-size: 1.1em;
 }
 
 .title {
   grid-area: title;
 }
 
-.tabs {
-  grid-area: tabs;
-  >span {
-    cursor: pointer;
-    padding: 0.25em;
-    text-transform: uppercase;
-  }
+.banner {
+  text-align: center;
+  grid-area: banner;
+  font-weight: bold;
 }
 
 .display-user {
   grid-area: display-user;
   text-align: right;
+  >span, img {
+    padding: 0.25em;
+  }
   >img {
-    max-width: 32px;
+    max-width: 24px;
+    vertical-align: middle;
+  }
+  >.user-name {
+    font-weight: bold;
+  }
+}
+
+.navigation {
+  background-color: lightgrey;
+  >div {
+    display: inline;
+  }
+}
+
+.tabs {
+  >div {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0.25em;
+    text-transform: uppercase;
+    margin-right: 0.5em;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  >.selected {
+    // background-color: lightpink;
+    // border: 1px solid yellow;
+    background-color: #e7e7e7;
   }
 }
 
@@ -41,13 +74,20 @@
   font-weight: bold;
 }
 
+div.arrivals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .arrival-card {
-  width: 300px;
+  min-width: 300px;
   border: solid 1px lightgray;
+  margin: 6px 3px 0 3px;
   >h2, p {
     margin: 0;
     font-size: 1em;
-    padding: 0.5em;
+    padding: 6px;
   }
   >p {
     padding-top: 0;
@@ -60,7 +100,7 @@ table.arrivals {
   >tbody {
     >tr {
       >td {
-        padding: 0.25em 0.5em;
+        padding: 3px 6px;
       }
       &:nth-child(odd) {
         background-color: #f1f1f1;
@@ -75,6 +115,8 @@ tr.warning {
 
 tr.soon {
   color: green;
+  font-size: x-large;
+  font-weight: bold;
 }
 
 tr.scheduled {

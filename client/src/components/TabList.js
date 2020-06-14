@@ -34,18 +34,18 @@ export default class TabList extends React.Component {
     return (
       <div className="tabs">
         { this.state.groups.map((group) => (
-          <span
+          <div
             className={this.props.selectedGroupId === group.id ? 'selected' : null}
             onClick={this.handleGroupClick}
             key={group.id}
-            data-id={group.id}>{group.data().name}</span>
+            data-id={group.id}>{group.data().name}</div>
           ))
         }
-        <span
+        <div
           className={this.props.admin ? 'selected' : null}
           onClick={this.handleGroupClick}
           key={'admin-tab'}
-          data-id={'admin'}>Admin</span>
+          data-id={'admin'}>Admin</div>
       </div>
     )
   }

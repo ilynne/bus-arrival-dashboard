@@ -1,6 +1,4 @@
 import React from 'react';
-import firebase from 'firebase';
-import DisplayUser from './DisplayUser';
 import TabList from './TabList';
 
 export default class Navigation extends React.Component {
@@ -10,14 +8,7 @@ export default class Navigation extends React.Component {
 
   render() {
     return (
-      <div className="navigation">
-        <div className="title">Bus Arrivals</div>
-        { this.props.isSignedIn
-          ? <DisplayUser
-              isSignedIn={this.props.isSignedIn}
-              signOut={this.props.signOut} />
-          : null
-        }
+      <div className={"navigation"}>
         { this.props.isSignedIn
           ? <TabList
               admin={this.props.admin}
