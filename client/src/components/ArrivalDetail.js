@@ -30,18 +30,13 @@ export default class ArrivalDetail extends React.Component {
   }
 
   render() {
-    const { arrival, now } = this.props
-    const arrivalTime = this.arrivalTime()
+    const { arrival } = this.props
     const minutesToArrival = this.minutesToArrival()
     const classNameList = this.classNameList()
     return (
       <tr className={classNameList}>
         <td>{arrival.routeShortName}</td>
-        <td>{arrival.predictedArrivalTime}</td>
-        <td>{arrival.scheduledArrivalTime}</td>
-        <td>{arrivalTime}</td>
-        <td>{arrivalTime - now}</td>
-        <td>{`${minutesToArrival} min`}</td>
+        <td className={'time-column'}>{`${minutesToArrival} min`}</td>
       </tr>
     )}
 }

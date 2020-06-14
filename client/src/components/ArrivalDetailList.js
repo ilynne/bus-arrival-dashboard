@@ -6,7 +6,9 @@ export default class ArrivalDetailList extends React.Component {
     const { arrivalsForBusRoutes } = this.props
 
     return (
-      <table className={'arrivals'}>
+      <table
+        className={'arrivals'}
+        cellSpacing={0}>
         <tbody>
           { this.props.arrivalsForBusRoutes.map((arrival, i) => (
             <ArrivalDetail

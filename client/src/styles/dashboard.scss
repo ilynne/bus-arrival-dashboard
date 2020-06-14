@@ -41,8 +41,32 @@
   font-weight: bold;
 }
 
+.arrival-card {
+  width: 300px;
+  border: solid 1px lightgray;
+  >h2, p {
+    margin: 0;
+    font-size: 1em;
+    padding: 0.5em;
+  }
+  >p {
+    padding-top: 0;
+  }
+}
+
 table.arrivals {
   color: navy;
+  width: 100%;
+  >tbody {
+    >tr {
+      >td {
+        padding: 0.25em 0.5em;
+      }
+      &:nth-child(odd) {
+        background-color: #f1f1f1;
+      }
+    }
+  }
 }
 
 tr.warning {
@@ -59,4 +83,8 @@ tr.scheduled {
 
 tr.past {
   color: darkgray;
+}
+
+td.time-column {
+  text-align: right;;
 }

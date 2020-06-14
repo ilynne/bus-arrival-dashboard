@@ -31,7 +31,7 @@ export default class ArrivalCard extends React.Component {
     }
     const { stops } = references
     const stopData = stops.find(stop => stop.id === this.props.stopId);
-    return `${stopData.name} ${stopData.direction}`;
+    return `${stopData.name} - ${stopData.direction}`;
   }
 
   busRouteIds = () => {
@@ -56,8 +56,8 @@ export default class ArrivalCard extends React.Component {
     const now = Date.now();
 
     return (
-      <div>
-        <h2>{stopLabel}{now}</h2>
+      <div className={'arrival-card'}>
+        <h2>{stopLabel}</h2>
         { arrivalsForBusRoutes && arrivalsForBusRoutes.length > 0
           ? <ArrivalDetailList
               arrivalsForBusRoutes={arrivalsForBusRoutes}
