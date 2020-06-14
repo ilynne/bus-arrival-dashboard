@@ -40,3 +40,23 @@
 .selected {
   font-weight: bold;
 }
+
+table.arrivals {
+  color: navy;
+}
+
+tr.warning {
+  color: red;
+}
+
+tr.soon {
+  color: green;
+}
+
+tr.scheduled {
+  color: black;
+}
+
+tr.past {
+  color: darkgray;
+}
