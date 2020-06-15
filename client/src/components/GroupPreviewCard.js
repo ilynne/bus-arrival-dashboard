@@ -65,10 +65,11 @@ export default class GroupPreviewCard extends React.Component {
             {this.busRouteShortName(busRouteId.data().busRouteId)}
             &nbsp;
             <span
-              className={'clickable'}
+              className={'clickable delete-link'}
               data-id={busRouteId.id}
               onClick={this.handleDeleteClick}
             >
+              &nbsp;
               delete
             </span>
           </p>

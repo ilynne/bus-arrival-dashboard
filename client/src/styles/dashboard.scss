@@ -70,6 +70,10 @@
   cursor: pointer;
 }
 
+.delete-link {
+  font-size: smaller;
+}
+
 .selected {
   font-weight: bold;
 }
@@ -143,9 +147,6 @@ table.arrivals {
   }
   >p {
     padding-top: 0;
-    >span.clickable {
-      font-size: smaller
-    }
   }
 }
 

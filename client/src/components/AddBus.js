@@ -31,14 +31,14 @@ export default class AddBus extends React.Component {
     fetch('/api/v1/routes')
       .then(res => res.json())
       .then((response) => { this.setRoutesForAgency(response.data) })
-      .catch((error) => { console.log("Error fetching routes for agency", error); })
+      .catch((error) => { console.log("Error fetching routes for agency", error); });
   }
 
   fetchStopsForRoute = () => {
     fetch(`/api/v1/routes/${this.state.busRouteId}/stops`)
       .then(res => res.json())
       .then((response) => { this.setStopsByBusRouteId(response.data); })
-      .catch((error) => { console.log("Error fetching stops for route", error); })
+      .catch((error) => { console.log("Error fetching stops for route", error); });
   }
 
   setRoutesForAgency = (data) => {
@@ -49,13 +49,13 @@ export default class AddBus extends React.Component {
   }
 
   setStopsByBusRouteId = (data) => {
-    const { busRouteId } = this.state
+    const { busRouteId } = this.state;
     this.setState({
       stopsByBusRouteId: {
         [busRouteId]: data,
         ...this.state.stopsByBusRouteId
       }
-    })
+    });
   }
 
   handleFormSubmit(e) {
@@ -66,7 +66,7 @@ export default class AddBus extends React.Component {
     this.setState({
       directionIndex: -1,
       busNumber: busNumber
-    }, () => this.filterRoutesByShortName())
+    }, () => this.filterRoutesByShortName());
   }
 
   handleGroupClick(groupId) {
@@ -75,13 +75,13 @@ export default class AddBus extends React.Component {
       busNumber: '',
       busRouteId: '',
       directionIndex: -1
-    })
+    });
   }
 
   handleDirectionClick(index) {
     this.setState({
       directionIndex: index
-    })
+    });
   }
 
   stopsForDirection() {
@@ -104,7 +104,7 @@ export default class AddBus extends React.Component {
     } else {
       this.setState({
         busRouteId: ""
-      })
+      });
     }
   }
 

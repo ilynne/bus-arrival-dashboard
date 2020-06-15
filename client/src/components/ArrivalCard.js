@@ -7,14 +7,12 @@ export default class ArrivalCard extends React.Component {
   }
 
   componentDidMount = () => {
+    this.arrivalSubscription = setInterval(this.fetchArrivalsForStop.bind(this), 60000);
     this.fetchArrivalsForStop();
-    this.unsubscribe = setInterval(this.fetchArrivalsForStop.bind(this), 60000);
   }
 
   componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
+    clearInterval(this.arrivalSubscription);
   }
 
   fetchArrivalsForStop = function () {

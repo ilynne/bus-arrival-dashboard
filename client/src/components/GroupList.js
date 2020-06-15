@@ -39,6 +39,16 @@ export default class GroupList extends React.Component {
       })
   }
 
+  removeGroup = (e) => {
+    const uid = firebase.auth().currentUser.uid;
+    db
+      .collection('users')
+      .doc(uid)
+      .collection('groups')
+      .doc(e.target.dataset.id)
+      .delete();
+  }
+
   componentDidMount() {
     const uid = firebase.auth().currentUser.uid;
 
@@ -67,7 +77,17 @@ export default class GroupList extends React.Component {
               className={this.props.selectedGroupId === group.id ? 'selected' : null}
               onClick={this.handleGroupClick}
               key={group.id}
-              data-id={group.id}>{group.data().name}</li>
+              data-id={group.id}>
+                {group.data().name}
+                &nbsp;
+                <span
+                  className={'clickable delete-link'}
+                  data-id={group.id}
+                  onClick={this.removeGroup}
+                >
+                  delete
+                </span>
+            </li>
             ))
           }
         </ul>
