@@ -21,8 +21,6 @@ export default class Arrivals extends React.PureComponent {
 
   getStops = () => {
     const uid = firebase.auth().currentUser.uid;
-    console.log(uid, this.props.selectedGroupId)
-
     db
       .collection('users')
       .doc(uid)
@@ -41,7 +39,6 @@ export default class Arrivals extends React.PureComponent {
 
   render() {
     const busesByStop = this.busesByStop();
-    console.log(busesByStop);
     return (
       <div className="arrivals">
         { Object.keys(busesByStop).map((stopId, i) => (

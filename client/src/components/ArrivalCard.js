@@ -17,7 +17,7 @@ export default class ArrivalCard extends React.Component {
     fetch(`/api/v1/stops/${stopId}/arrivals`)
       .then(res => res.json())
       .then((response) => { this.setArrivalsForStop(response.data) })
-      .catch((error) => { console.log("Error while fetching test datas", error); })
+      .catch((error) => { console.log("Error fetching arrival for stop", error); })
   }
 
   setArrivalsForStop = (data) => {

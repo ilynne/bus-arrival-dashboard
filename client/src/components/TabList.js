@@ -1,7 +1,6 @@
 import React from 'react';
 import db from '../db';
 import firebase from 'firebase';
-import DisplayUser from './DisplayUser';
 
 export default class TabList extends React.Component {
   state = {
@@ -26,7 +25,6 @@ export default class TabList extends React.Component {
   }
 
   handleGroupClick = (e) => {
-    console.log('group clicked')
     this.props.handleGroupClick(e.target.dataset.id)
   }
 

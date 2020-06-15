@@ -3,8 +3,6 @@ import ArrivalDetail from './ArrivalDetail';
 
 export default class ArrivalDetailList extends React.Component {
   render() {
-    const { arrivalsForBusRoutes } = this.props
-
     return (
       <table
         className={'arrivals'}
@@ -14,6 +12,7 @@ export default class ArrivalDetailList extends React.Component {
             <ArrivalDetail
               arrival={arrival}
               now={this.props.now}
+              key={`arrival-detail-${i}`}
             >
             </ArrivalDetail>
             ))

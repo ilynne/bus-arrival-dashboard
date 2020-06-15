@@ -38,7 +38,6 @@ export default class Home extends React.Component {
   }
 
   handleGroupClick = (tabId) => {
-    console.log(tabId)
     if (tabId === 'admin') {
       this.setState({
         admin: true,

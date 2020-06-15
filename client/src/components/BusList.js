@@ -1,6 +1,4 @@
 import React from 'react';
-import db from '../db';
-import firebase from 'firebase';
 
 export default class BusList extends React.Component {
   handleBusNumberChange = (e) => {

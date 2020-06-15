@@ -22,8 +22,7 @@ export default class StopList extends React.Component {
       .collection('stops')
       .where('busRouteId', '==', this.props.busRouteId)
       .onSnapshot(snapshot => {
-        this.setState({ groupStops: snapshot.docs },
-          () => this.setGroupStops());
+        this.setState({ groupStops: snapshot.docs });
       });
   }
 
@@ -34,7 +33,6 @@ export default class StopList extends React.Component {
   }
 
   addStop = (e) => {
-    console.log('crud')
     const uid = firebase.auth().currentUser.uid;
     const { selectedGroupId } = this.props;
     db
@@ -46,18 +44,14 @@ export default class StopList extends React.Component {
       .add({
         stopId: e.target.dataset.id,
         busRouteId: this.props.busRouteId
-      }).then(() => {
-        console.log('stop added')
       })
   }
 
   removeStop = (e) => {
-    console.log('remove stop')
     const uid = firebase.auth().currentUser.uid;
     const { selectedGroupId } = this.props;
     const stop = this.state.groupStops.find(
       stop => ( stop.data().stopId === e.target.dataset.id && stop.data().busRouteId === this.props.busRouteId) )
-    console.log(stop.id)
     db
       .collection('users')
       .doc(uid)
@@ -68,14 +62,8 @@ export default class StopList extends React.Component {
       .delete();
   }
 
-  // TODO: delete
-  setGroupStops = () => {
-    console.log('setGroupStops')
-  }
-
   stopsArray = () => {
     const groupStops = this.state.groupStops.map(stop => ( stop.data().stopId ));
-    console.log(groupStops)
     return this.props.stopsForDirection
   }
 

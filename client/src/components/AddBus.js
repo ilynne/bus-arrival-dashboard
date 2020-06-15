@@ -31,21 +31,18 @@ export default class AddBus extends React.Component {
     fetch('/api/v1/routes')
       .then(res => res.json())
       .then((response) => { this.setRoutesForAgency(response.data) })
-      .catch((error) => { console.log("Error while fetching test datas", error); })
+      .catch((error) => { console.log("Error fetching routes for agency", error); })
   }
 
   fetchStopsForRoute = () => {
-    console.log('fetch stops', this.state.busRouteId)
     fetch(`/api/v1/routes/${this.state.busRouteId}/stops`)
       .then(res => res.json())
-      .then((response) => { console.log(response);
-                            this.setStopsByBusRouteId(response.data); })
-      .catch((error) => { console.log("Error while fetching test datas", error); })
+      .then((response) => { this.setStopsByBusRouteId(response.data); })
+      .catch((error) => { console.log("Error fetching stops for route", error); })
   }
 
   setRoutesForAgency = (data) => {
     const { list, references } = data;
-    console.log(list, references);
     this.setState({
       routesForAgency: list
     });
@@ -53,7 +50,6 @@ export default class AddBus extends React.Component {
 
   setStopsByBusRouteId = (data) => {
     const { busRouteId } = this.state
-    console.log(data)
     this.setState({
       stopsByBusRouteId: {
         [busRouteId]: data,
@@ -83,7 +79,6 @@ export default class AddBus extends React.Component {
   }
 
   handleDirectionClick(index) {
-    console.log('direction', index)
     this.setState({
       directionIndex: index
     })
@@ -94,7 +89,6 @@ export default class AddBus extends React.Component {
     const { directionIndex } = this.state;
     if (directionIndex >= 0) {
       const stopIds = stopGroups[directionIndex].stopIds;
-      // console.log(stopIds)
       const { busRouteId, stopsByBusRouteId } = this.state;
       const { references } = stopsByBusRouteId[busRouteId] || [];
       return references.stops.filter(stop => stopIds.includes(stop.id));
@@ -102,8 +96,7 @@ export default class AddBus extends React.Component {
   }
 
   filterRoutesByShortName = () => {
-    const routeForBusNumber = this.state.routesForAgency.find(route => route.shortName == this.state.busNumber);
-    console.log(routeForBusNumber)
+    const routeForBusNumber = this.state.routesForAgency.find(route => route.shortName === this.state.busNumber);
     if (routeForBusNumber) {
       this.setState({
         busRouteId: routeForBusNumber.id
@@ -171,8 +164,7 @@ export default class AddBus extends React.Component {
         { this.state.selectedGroupId !== ''
           ? <GroupPreviewList
               selectedGroupId={this.state.selectedGroupId}
-              routesForAgency={this.state.routesForAgency}
-              selectedGroupId={this.state.selectedGroupId}>
+              routesForAgency={this.state.routesForAgency}>
             </GroupPreviewList>
           : null
         }

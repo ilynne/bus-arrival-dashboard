@@ -1,6 +1,4 @@
 import React from 'react';
-import firebase from 'firebase';
-import db from '../db';
 
 export default class GroupPreviewCard extends React.Component {
   state = {
