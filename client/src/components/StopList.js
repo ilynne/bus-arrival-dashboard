@@ -62,11 +62,6 @@ export default class StopList extends React.Component {
       .delete();
   }
 
-  stopsArray = () => {
-    const groupStops = this.state.groupStops.map(stop => ( stop.data().stopId ));
-    return this.props.stopsForDirection
-  }
-
   render() {
     const groupStops = this.state.groupStops.map(stop => ( stop.data().stopId ));
 

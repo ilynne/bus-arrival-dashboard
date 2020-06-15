@@ -42,7 +42,7 @@ export default class AddBus extends React.Component {
   }
 
   setRoutesForAgency = (data) => {
-    const { list, references } = data;
+    const { list } = data;
     this.setState({
       routesForAgency: list
     });
