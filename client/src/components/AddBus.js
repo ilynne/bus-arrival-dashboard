@@ -2,8 +2,8 @@ import React from 'react';
 import DirectionList from './DirectionList';
 import StopList from './StopList';
 import GroupList from './GroupList';
-import BusList from './BusList';
 import GroupPreviewList from './GroupPreviewList';
+import BusInput from './BusInput';
 
 export default class AddBus extends React.Component {
   constructor(props) {
@@ -127,17 +127,16 @@ export default class AddBus extends React.Component {
           onSubmit={this.handleFormSubmit}
           method={'post'}>
             <GroupList
-              groupList={this.state.groups}
               handleGroupClick={this.handleGroupClick}
               selectedGroupId={this.state.selectedGroupId}
             >
             </GroupList>
 
             { this.state.selectedGroupId !== ''
-              ? <BusList
+              ? <BusInput
                   busNumber={this.state.busNumber}
                   handleBusNumberChange={this.handleBusNumberChange}>
-                </BusList>
+                </BusInput>
               : this.state.selectedGroupId
             }
 

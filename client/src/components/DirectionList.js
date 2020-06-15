@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function DirectionList(props) {
 
@@ -24,3 +25,9 @@ function DirectionList(props) {
 }
 
 export default DirectionList;
+
+DirectionList.propTypes = {
+  stopGroups: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDirectionClick: PropTypes.func.isRequired,
+  directionIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+}

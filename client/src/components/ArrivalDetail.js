@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class ArrivalDetail extends React.Component {
 
@@ -39,4 +40,9 @@ export default class ArrivalDetail extends React.Component {
         <td className={'time-column'}>{`${minutesToArrival} min`}</td>
       </tr>
     )}
+}
+
+ArrivalDetail.propTypes = {
+  arrival: PropTypes.object.isRequired,
+  now: PropTypes.number.isRequired,
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import db from '../db';
 import firebase from 'firebase';
+import PropTypes from 'prop-types';
 
 export default class StopList extends React.Component {
   state = {
@@ -81,4 +82,10 @@ export default class StopList extends React.Component {
       </div>
     );
   }
+}
+
+StopList.propTypes = {
+  busRouteId: PropTypes.string.isRequired,
+  selectedGroupId: PropTypes.string.isRequired,
+  stopsForDirection: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

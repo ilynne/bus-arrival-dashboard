@@ -3,6 +3,7 @@ import db from '../db';
 import firebase from 'firebase';
 import _ from 'lodash';
 import GroupPreviewCard from './GroupPreviewCard';
+import PropTypes from 'prop-types';
 
 export default class GroupPreviewList extends React.PureComponent {
   state = {
@@ -70,4 +71,9 @@ export default class GroupPreviewList extends React.PureComponent {
       </div>
     )
   }
+}
+
+GroupPreviewList.propTypes = {
+  selectedGroupId: PropTypes.string.isRequired,
+  routesForAgency: PropTypes.arrayOf(PropTypes.object).isRequired
 }

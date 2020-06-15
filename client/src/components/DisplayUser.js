@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
+import PropTypes from 'prop-types';
 
 export default class DisplayUser extends React.Component {
   signOut = (e) => {
@@ -19,4 +20,9 @@ export default class DisplayUser extends React.Component {
       </div>
     )
   }
+}
+
+DisplayUser.propTypes = {
+  isSignedIn: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired,
 }

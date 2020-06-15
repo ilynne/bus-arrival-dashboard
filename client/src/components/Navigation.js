@@ -1,5 +1,6 @@
 import React from 'react';
 import TabList from './TabList';
+import PropTypes from 'prop-types';
 
 export default class Navigation extends React.Component {
   state = {
@@ -21,4 +22,12 @@ export default class Navigation extends React.Component {
       </div>
     )
   }
+}
+
+Navigation.propTypes = {
+  isSignedIn: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired,
+  handleGroupClick: PropTypes.func.isRequired,
+  admin: PropTypes.bool.isRequired,
+  selectedGroupId: PropTypes.string.isRequired,
 }

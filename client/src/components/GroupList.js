@@ -1,6 +1,7 @@
 import React from 'react';
 import db from '../db';
 import firebase from 'firebase';
+import PropTypes from 'prop-types';
 
 export default class GroupList extends React.Component {
   state = {
@@ -102,4 +103,10 @@ export default class GroupList extends React.Component {
       </div>
     );
   }
+}
+
+
+GroupList.propTypes = {
+  handleGroupClick: PropTypes.func.isRequired,
+  selectedGroupId: PropTypes.string.isRequired,
 }

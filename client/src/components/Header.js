@@ -1,5 +1,6 @@
 import React from 'react';
 import DisplayUser from './DisplayUser';
+import PropTypes from 'prop-types';
 
 export default class Header extends React.Component {
   state = {
@@ -26,4 +27,9 @@ export default class Header extends React.Component {
       </div>
     )
   }
+}
+
+Header.propTypes = {
+  isSignedIn: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired,
 }

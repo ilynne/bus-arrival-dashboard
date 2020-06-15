@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class GroupPreviewCard extends React.Component {
   state = {
@@ -77,4 +78,11 @@ export default class GroupPreviewCard extends React.Component {
       </div>
     )
   }
+}
+
+GroupPreviewCard.propTypes = {
+  stopId: PropTypes.string.isRequired,
+  busRouteIds: PropTypes.arrayOf(PropTypes.object).isRequired,
+  routesForAgency: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDeleteClick: PropTypes.func.isRequired,
 }

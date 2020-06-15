@@ -1,6 +1,7 @@
 import React from 'react';
 import db from '../db';
 import firebase from 'firebase';
+import PropTypes from 'prop-types';
 
 export default class TabList extends React.Component {
   state = {
@@ -47,4 +48,10 @@ export default class TabList extends React.Component {
       </div>
     )
   }
+}
+
+TabList.propTypes = {
+  admin: PropTypes.bool.isRequired,
+  selectedGroupId: PropTypes.string.isRequired,
+  handleGroupClick: PropTypes.func.isRequired,
 }

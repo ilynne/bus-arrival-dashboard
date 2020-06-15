@@ -1,5 +1,6 @@
 import React from 'react';
 import ArrivalDetailList from './ArrivalDetailList';
+import PropTypes from 'prop-types';
 
 export default class ArrivalCard extends React.Component {
   state = {
@@ -75,4 +76,9 @@ export default class ArrivalCard extends React.Component {
       </div>
     )
   }
+}
+
+ArrivalCard.propTypes = {
+  stopId: PropTypes.string.isRequired,
+  busRouteIds: PropTypes.arrayOf(PropTypes.object).isRequired,
 }

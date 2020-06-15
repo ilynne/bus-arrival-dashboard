@@ -1,5 +1,6 @@
 import React from 'react';
 import ArrivalDetail from './ArrivalDetail';
+import PropTypes from 'prop-types';
 
 export default class ArrivalDetailList extends React.Component {
   render() {
@@ -20,4 +21,9 @@ export default class ArrivalDetailList extends React.Component {
         </tbody>
       </table>
     )}
+}
+
+ArrivalDetailList.propTypes = {
+  arrivalsForBusRoutes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  now: PropTypes.number.isRequired,
 }

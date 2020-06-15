@@ -3,6 +3,7 @@ import db from '../db';
 import firebase from 'firebase';
 import _ from 'lodash';
 import ArrivalCard from './ArrivalCard';
+import PropTypes from 'prop-types';
 
 export default class Arrivals extends React.PureComponent {
   state = {
@@ -52,4 +53,8 @@ export default class Arrivals extends React.PureComponent {
       </div>
     )
   }
+}
+
+Arrivals.propTypes = {
+  selectedGroupId: PropTypes.string.isRequired,
 }
