@@ -6,6 +6,8 @@ Sometimes you need something much simpler. I live close to two bus stops and dif
 
 The Bus Arrival Dashboard should group the buses by stop and sort them by arrival time. Color coding the arrival times would help me decide which stop to walk toward.
 
+Don't merge this
+
 ## Wireframes
 
 ### Sign in
