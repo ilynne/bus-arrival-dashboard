@@ -35,7 +35,6 @@ The Bus Arrival Dashboard should group the buses by stop and sort them by arriva
 - Ruby 2.6.3 or greater
 - Rails 6.0
 
-
 ## Tasks
 
 - [ ] Rails backend app
